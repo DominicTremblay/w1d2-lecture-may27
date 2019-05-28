@@ -5,7 +5,6 @@
 // output an error message.We need at least 2 arguments.
 
 // Extract the command line arguments
-
 function getArguments() {
   return process.argv.slice(2);
 }
@@ -21,12 +20,16 @@ function convertToNb(args) {
   return numbersArr;
 }
 
+// Print out an error message and stop the execution of the program
 function errorMessage(message) {
   console.log(message);
   process.exit();
 }
 
-// * edge cases. if it's not a number
+// validate the arguments
+// checks if we did not provide at least 2 arguments or
+// if one of the arguments is NaN
+
 function validateArgs(args) {
   if (args.length < 2) {
     errorMessage('Please provide at least two numbers');
@@ -41,11 +44,14 @@ function validateArgs(args) {
   return args;
 }
 
+// Filter out any decimal number
 function getAllInt(numbersArr) {
   var allIntNb = [];
 
   for (var i = 0; i < numbersArr.length; i++) {
+    // test if it does not have any decimal part
     if (numbersArr[i] - numbersArr[i].toFixed(0) === 0) {
+      // Another condition that might do the trick
       // if (numbersArr[i] % 1 === 0) {
       allIntNb.push(numbersArr[i]);
     }
@@ -66,12 +72,10 @@ function sum(numbers) {
   return total;
 }
 
-console.log(
-  'total:',
-  sum(getAllInt(validateArgs(convertToNb(getArguments()))))
-);
+// Print the sum at the console
+function displaySum(sum) {
+  console.log('The sum is ' + sum);
+}
 
-//
-//
-
-// print the sum
+// calling the functions
+displaySum(sum(getAllInt(validateArgs(convertToNb(getArguments())))));
