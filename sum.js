@@ -11,7 +11,6 @@ function getArguments() {
 }
 
 // Convert arguments to numbers
-
 function convertToNb(args) {
   var numbersArr = [];
 
@@ -39,11 +38,24 @@ function validateArgs(args) {
       errorMessage('Please provide only numbers');
     }
   }
+  return args;
+}
+
+function getAllInt(numbersArr) {
+  var allIntNb = [];
+
+  for (var i = 0; i < numbersArr.length; i++) {
+    if (numbersArr[i] - numbersArr[i].toFixed(0) === 0) {
+      // if (numbersArr[i] % 1 === 0) {
+      allIntNb.push(numbersArr[i]);
+    }
+  }
+
+  return allIntNb;
 }
 
 // loop throught the arguments
 // add them up
-
 function sum(numbers) {
   var total = 0;
 
@@ -54,7 +66,10 @@ function sum(numbers) {
   return total;
 }
 
-console.log('total:', validateArgs(convertToNb(getArguments())));
+console.log(
+  'total:',
+  sum(getAllInt(validateArgs(convertToNb(getArguments()))))
+);
 
 //
 //
