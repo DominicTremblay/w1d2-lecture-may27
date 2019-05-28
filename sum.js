@@ -12,7 +12,34 @@ function getArguments() {
 
 // Convert arguments to numbers
 
+function convertToNb(args) {
+  var numbersArr = [];
+
+  for (var i = 0; i < args.length; i++) {
+    numbersArr.push(Number(args[i]));
+  }
+
+  return numbersArr;
+}
+
+function errorMessage(message) {
+  console.log(message);
+  process.exit();
+}
+
 // * edge cases. if it's not a number
+function validateArgs(args) {
+  if (args.length < 2) {
+    errorMessage('Please provide at least two numbers');
+  }
+
+  for (var i = 0; i < args.length; i++) {
+    // check if any argument is NaN
+    if (isNaN(args[i])) {
+      errorMessage('Please provide only numbers');
+    }
+  }
+}
 
 // loop throught the arguments
 // add them up
@@ -21,13 +48,13 @@ function sum(numbers) {
   var total = 0;
 
   for (var i = 0; i < numbers.length; i++) {
-    total += Number(numbers[i]);
+    total += numbers[i];
   }
 
   return total;
 }
 
-console.log('total:', sum(getArguments()));
+console.log('total:', validateArgs(convertToNb(getArguments())));
 
 //
 //
